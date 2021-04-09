@@ -11,3 +11,41 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.wrapper{
+  border: 2px solid red;
+  border-radius: 2%;
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+.input{
+width: 40%;
+margin: 2rem;
+text-align: center;
+}
+.babyNameInput{
+display: flex;
+flex-direction: row;
+
+}
+.all{
+  background-color: burlywood;
+}
+.female{
+  background-color: rgb(156, 46, 132);
+}
+.male{
+  background-color: rgb(184, 91, 25);
+}
+p{
+  display: inline-block;
+  margin: 2%;
+  padding: 1%;
+  width: 5rem;
+  border-radius: 10%;
+  text-align: center;
+}
+.buttonDiv{
+  padding-top: 2rem;
+  
+}
