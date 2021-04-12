@@ -10,17 +10,32 @@ const AllBabyNamesFunction = () => {
 
   const handleBabySearch = (event) => {
     const handleBabySearchCase = event.target.value.toLowerCase();
-
-    const filterBabySearch = allBabyNames.filter((filteredName) => {
-      if (filteredName.name.toLowerCase().includes(handleBabySearchCase)) {
-        return filteredName;
-      }
+    if(handleBabySearchCase === ""){
+      const filterBabySearch = allBabyNames.filter((filteredName) => {
+     
+        return containsObject(filteredName, favorites);
     });
-    setNames(filterBabySearch);
-    if (handleBabySearch === "") {
-      setNames(allBabyNames);
+    setNames(filterBabySearch)
+    } else{ 
+      const nameSearched = allBabyNames.filter((babyName)=>{
+         if (babyName.name.toLowerCase().includes(handleBabySearchCase)) {
+           return containsObject(babyName, favorites);
+        }})
+        setNames(nameSearched);
+       }
     }
-  };
+  
+  
+function containsObject(object, list) {
+    var i;
+    for (i = 0; i < list.length; i++) {
+        if (list[i] === object) {
+            return false;
+        }
+    }
+
+    return true;
+}
 
   const handleFavouriteNames = (event) => {
     const favouriteNameSelect = event.target.innerText;
@@ -50,9 +65,62 @@ const AllBabyNamesFunction = () => {
      setNames([...names, ...tempNames]);
   };
 
+  const handleAllSelect = (event)=>{
+    const genderSelected = event.target.parentNode.childNodes;
+     genderSelected.forEach((list) => {
+       if (list.classList.contains("all")){
+         (list.classList.add("active"))
+       }else {
+         list.classList.remove("active")
+       }
+     });
+    const getButtons = allBabyNames.filter((babyName)=>{
+      return containsObject(babyName, favorites)
+    })
+    setNames(getButtons)
+  }
+
+   const handleMaleSelect = (event) => {
+    const genderSelected = event.target.parentNode.childNodes;
+    genderSelected.forEach((list) => {
+      if (list.classList.contains("male")) {
+        list.classList.add("active");
+      } else {
+        list.classList.remove("active");
+      }
+    });
+    const getButtons = allBabyNames.filter((babyName) => {
+      if(babyName.sex === "m"){
+      return containsObject(babyName, favorites);
+      }
+    });
+    setNames(getButtons);
+  }
+   const handleFemaleSelect = (event) => {
+     const genderSelected = event.target.parentNode.childNodes;
+     genderSelected.forEach((list) => {
+       if (list.classList.contains("female")) {
+         list.classList.add("active");
+       } else {
+         list.classList.remove("active");
+       }
+     });
+     const getButtons = allBabyNames.filter((babyName) => {
+       if (babyName.sex === "f") {
+         return containsObject(babyName, favorites);
+       }
+     });
+     setNames(getButtons);
+   };
+
   return (
     <div>
-      <BabyNamesInput handleBabySearch={handleBabySearch} />
+      <BabyNamesInput
+        handleBabySearch={handleBabySearch}
+        handleAllSelect={handleAllSelect}
+        handleMaleSelect={handleMaleSelect}
+        handleFemaleSelect={handleFemaleSelect}
+      />
       <FavouriteNames
         favorites={favorites}
         handleUnClickFavorite={handleUnClickFavorite}
@@ -62,7 +130,7 @@ const AllBabyNamesFunction = () => {
         handleFavouriteNames={handleFavouriteNames}
       />
     </div>
-  );
-};
+  )
 
+}
 export default AllBabyNamesFunction;
