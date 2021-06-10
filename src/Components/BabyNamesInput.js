@@ -1,5 +1,6 @@
 import React from 'react'
-
+import { FaMale, FaFemale } from "react-icons/fa";
+import { IoMaleFemale } from "react-icons/io5";
 
 
 const BabyNamesInput = (props) => {
@@ -14,15 +15,14 @@ const BabyNamesInput = (props) => {
         ></input>
         <div className="buttonDiv">
           <button onClick={props.handleAllSelect} className="all">
-            All
+            <IoMaleFemale className="classIcon" />
           </button>
           <button onClick={props.handleMaleSelect} className="male">
-            Boys
+            <FaMale className="classIcon" />
           </button>
           <button onClick={props.handleFemaleSelect} className="female">
-          <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK4C_4E8DSTLi2y77VheF6bbmRkdOvgQCw0fhgZxWkDOO_D9fqGwzu2ouxcc6ZPiUs1UI&usqp=CAU"></img>
-          </button> 
-          
+            <FaFemale className="classIcon" />
+          </button>
         </div>
       </div>
     );
